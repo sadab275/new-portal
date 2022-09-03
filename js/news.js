@@ -30,7 +30,7 @@ const displayNews = (idNews) => {
 }
 // console.log
 const showNews = (news) => {
-    console.log(news[0]);
+    // console.log(news[0]);
     const newsDiv = document.getElementById("newsContainer");
     newsDiv.innerHTML = ``;
     news.forEach(newss => {
@@ -58,13 +58,39 @@ const showNews = (news) => {
                             <i class="fa fa-eye" aria-hidden="true">${" " + newss.total_view}</i>
                         </div>
                         <div>
-                            <button type="button" class="btn btn-outline-dark">Show More</button>
+                            <button onclick = "detailsNews('${newss._id}')" type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#newsDetailsModal">Show More</button>
+                            
                         </div>
                     </div>
                         
                     </div>
         `
         newsDiv.appendChild(newsBox);
+
     })
 }
+
+const detailsNews = (news_id) => {
+    // console.log(news_id);
+    const url = ` https://openapi.programming-hero.com/api/news/${news_id}`;
+    fetch(url)
+        .then(res => res.json())
+        .then(data => modalNews(data.data));
+}
+const modalNews = daily => {
+    console.log(daily[0].image_url);
+    const getModalTitle = document.getElementById("exampleModalLabel");
+    getModalTitle.innerText = daily[0].title;
+    const descrip = document.getElementById("description");
+    descrip.innerText = daily[0].details;
+
+    const authorName = document.getElementById("authorName");
+    const a = (daily[0].author.name != "" && daily[0].author.name != null) ? daily[0].author.name : "No data found";
+    authorName.innerText = a;
+    const getImg = document.getElementById("imgGet");
+    getImg.innerHTML = `
+    <img class="img-fluid" src="${daily[0].image_url}" alt=""></img>
+    `
+}
+{/* <img src="${daily[0].image_url}" alt=""></img> */ }
 connectApi();
