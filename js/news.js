@@ -13,7 +13,7 @@ const showCategory = categories => {
         const containerFluid = document.createElement("div");
         containerFluid.classList.add("col");
         containerFluid.innerHTML = `
-        <a onclick='displayNews("${category.category_id}")' class="nav-link">${category.category_name}</a>
+        <a onclick='displayNews("${category.category_id}")' class="nav-link btn btn-outline-info p-2 m-1">${category.category_name}</a>
         `;
 
         categoryContainer.appendChild(containerFluid);
@@ -116,4 +116,14 @@ const toggleSpinner = isLoading => {
         loaderSection.classList.add("d-none");
     }
 }
+
 connectApi();
+
+// const showAll = () => {
+//     const url = "https://openapi.programming-hero.com/api/news/category/08"
+//     fetch(url)
+//         .then(res => res.json())
+//         .then(data => showNews(data.data));
+// }
+
+// showAll();
