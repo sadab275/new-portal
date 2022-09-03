@@ -26,13 +26,21 @@ const showCategory = categories => {
 const displayNews = (idNews) => {
     const url = `https://openapi.programming-hero.com/api/news/category/${idNews}`
     toggleSpinner(true);
-    fetch(url)
-        .then(res => res.json())
-        .then(data => showNews(data.data));
+    try {
+        fetch(url)
+            .then(res => res.json())
+            .then(data => showNews(data.data));
+    }
+    catch (error) {
+        console.log(error)
+    }
 }
 // console.log
 const showNews = (news) => {
-    // console.log(news[0]);
+    // console.log(news.);
+    const count = document.getElementById("count");
+    count.innerText = news.length + " items found for chosen category ";
+
     const newsDiv = document.getElementById("newsContainer");
 
     newsDiv.innerHTML = ``;
@@ -42,6 +50,7 @@ const showNews = (news) => {
         newsBox.classList.add("row");
         newsBox.classList.add("border");
         newsBox.classList.add("border-dark");
+        newsBox.classList.add("mb-3");
         newsBox.innerHTML = `
         <div class="col-md-4">
                         <img src="${newss.thumbnail_url}" class="img-fluid rounded-start" alt="...">
