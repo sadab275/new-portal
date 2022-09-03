@@ -6,6 +6,7 @@ const connectApi = () => {
 }
 
 const showCategory = categories => {
+
     const categoryContainer = document.getElementById("categoryContainer");
     categories.forEach(category => {
         // console.log(category);
@@ -14,6 +15,7 @@ const showCategory = categories => {
         containerFluid.innerHTML = `
         <a onclick='displayNews("${category.category_id}")' class="nav-link">${category.category_name}</a>
         `;
+
         categoryContainer.appendChild(containerFluid);
     })
 }
@@ -23,7 +25,7 @@ const showCategory = categories => {
 // }
 const displayNews = (idNews) => {
     const url = `https://openapi.programming-hero.com/api/news/category/${idNews}`
-
+    toggleSpinner(true);
     fetch(url)
         .then(res => res.json())
         .then(data => showNews(data.data));
@@ -32,6 +34,7 @@ const displayNews = (idNews) => {
 const showNews = (news) => {
     // console.log(news[0]);
     const newsDiv = document.getElementById("newsContainer");
+
     newsDiv.innerHTML = ``;
     news.forEach(newss => {
 
@@ -67,7 +70,8 @@ const showNews = (news) => {
         `
         newsDiv.appendChild(newsBox);
 
-    })
+    });
+    toggleSpinner(false);
 }
 
 const detailsNews = (news_id) => {
@@ -93,4 +97,14 @@ const modalNews = daily => {
     `
 }
 {/* <img src="${daily[0].image_url}" alt=""></img> */ }
+
+const toggleSpinner = isLoading => {
+    const loaderSection = document.getElementById("spinner");
+    if (isLoading == true) {
+        loaderSection.classList.remove("d-none");
+    }
+    else {
+        loaderSection.classList.add("d-none");
+    }
+}
 connectApi();
