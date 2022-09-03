@@ -89,8 +89,8 @@ const modalNews = daily => {
     descrip.innerText = daily[0].details;
 
     const authorName = document.getElementById("authorName");
-    const a = (daily[0].author.name != "" && daily[0].author.name != null) ? daily[0].author.name : "No data found";
-    authorName.innerText = a;
+    const a = (daily[0].author.name != "" && daily[0].author.name != null) ? daily[0].author.name : "No Author name found";
+    authorName.innerText = "Author Name: " + a;
     const getImg = document.getElementById("imgGet");
     getImg.innerHTML = `
     <img class="img-fluid" src="${daily[0].image_url}" alt=""></img>
