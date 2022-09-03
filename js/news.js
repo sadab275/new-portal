@@ -37,6 +37,8 @@ const showNews = (news) => {
 
         const newsBox = document.createElement("div");
         newsBox.classList.add("row");
+        newsBox.classList.add("border");
+        newsBox.classList.add("border-dark");
         newsBox.innerHTML = `
         <div class="col-md-4">
                         <img src="${newss.thumbnail_url}" class="img-fluid rounded-start" alt="...">
@@ -47,6 +49,19 @@ const showNews = (news) => {
                             <p class="card-text">${newss.details.slice(0, 300) + "..."}</p>
                             <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                         </div>
+                    <div class = "d-flex justify-content-between container">
+                        <div>
+                            <img src="${newss.author.img}" class="img-thumbnail rounded-circle" style = "width: 50px; height: 50px" alt="...">
+                            <span>${newss.author.name}</span>
+                        </div>
+                        <div class="mt-2">
+                            <i class="fa fa-eye" aria-hidden="true">${" " + newss.total_view}</i>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-outline-dark">Show More</button>
+                        </div>
+                    </div>
+                        
                     </div>
         `
         newsDiv.appendChild(newsBox);
